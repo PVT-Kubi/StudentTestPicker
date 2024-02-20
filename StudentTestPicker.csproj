@@ -52,4 +52,14 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Klasy\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\ClassStudents.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
