@@ -29,6 +29,7 @@ namespace StudentTestPicker.Models
                 .Select(filename => new Klasa()
                 {
                     Filename = filename,
+                    ClassNumber = File.ReadAllText(filename).Split('\n')[0],
                     Text = File.ReadAllText(filename)
                 });
 
@@ -48,7 +49,10 @@ namespace StudentTestPicker.Models
                 return 1; 
             }
 
-            File.WriteAllText(Path.Combine(appDataPath, className), "");
+            if (name.Split("\t").Length <= 1)
+                return 2;
+
+            File.WriteAllText(Path.Combine(appDataPath, className), $"{name}");
             return 0;
         }
 

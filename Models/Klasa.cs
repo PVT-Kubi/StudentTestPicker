@@ -9,6 +9,7 @@ namespace StudentTestPicker.Models
     class Klasa
     {
         public string Filename { get; set; }
+        public string ClassNumber { get; set; }
         public string Text { get; set; }
 
     }

@@ -23,22 +23,25 @@ namespace StudentTestPicker.Models
             string path= FileSystem.AppDataDirectory;
             List<Student> students = new List<Student>();
 
-            if(File.Exists(Path.Combine(path, $"/{klasa}.cls.txt"))) 
+            if(File.Exists(Path.Combine(path, $"{klasa}.cls.txt"))) 
             {
                 string text = File.ReadAllText(path);
                 string[] studentsData = text.Split('\n');
                 foreach (string s in studentsData)
                 {
                     string[] studentData = s.Split("\t");
-                    students.Add(new Student()
+                    if (s.Length > 1)
                     {
-                        Number = int.Parse((string)studentData[0]),
-                        Name = studentData[1],
-                        Surname = studentData[2],
-                        Presence = studentData[3],
-                        AskedCount = int.Parse((string)studentData[4]),
-
-                    });
+                        students.Add(new Student()
+                        {
+                            Number = int.Parse((string)studentData[0]),
+                            Name = studentData[1],
+                            Surname = studentData[2],
+                            Presence = bool.Parse(studentData[3]),
+                            AskedCount = int.Parse((string)studentData[4]),
+                            ClassNumber = studentData[5]
+                        });
+                    }
                 }
 
                 foreach (Student student in students) 
@@ -56,24 +59,37 @@ namespace StudentTestPicker.Models
                 Number = Students.Count + 1,
                 Name = name,
                 Surname = surname,
-                Presence = "obecny",
-                AskedCount = 0
-
+                Presence = true,
+                AskedCount = 0,
+                ClassNumber = klasa
             };
 
-            if (!File.Exists(Path.Combine(path, $"/{klasa}.cls.txt")))
+            if (!File.Exists(Path.Combine(path, $"{klasa}.cls.txt")))
                 return 1;
 
-            string studentData = $"\n{student.Number}\t{student.Name}\t{student.Surname}\t{student.Presence}\t{student.AskedCount}";
+            string studentData = $"\n{student.Number}\t{student.Name}\t{student.Surname}\t{student.Presence}\t{student.AskedCount}\t{student.ClassNumber}";
 
-            File.WriteAllText(Path.Combine(path, $"/{klasa}.cls.txt"), studentData);
+            File.WriteAllText(Path.Combine(path, $"{klasa}.cls.txt"), studentData);
 
             return 0;
         }
 
+        public int ChangePresence(string klasa, string name, string surname)
+        {
+            foreach(Student s in Students)
+            {
+                if(s.Name == name && s.Surname == surname)
+                {
+                    Student student = s;
+                    s.Presence = !s.Presence;
+                    return 0;
+                }
+            }
+            return 1;
+        }
         public int DeleteStudent(string klasa, string name, string surname)
         {
-            string path = Path.Combine(FileSystem.AppDataDirectory, $"/{klasa}.cls.txt");
+            string path = Path.Combine(FileSystem.AppDataDirectory, $"{klasa}.cls.txt");
 
             if(!File.Exists(path)) return 1;
 

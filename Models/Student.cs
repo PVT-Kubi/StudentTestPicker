@@ -11,7 +11,8 @@ namespace StudentTestPicker.Models
         public int Number { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Presence { get; set; }
+        public bool Presence { get; set; }
         public int AskedCount { get; set; }
+        public string ClassNumber { get; set; }
     }
 }
