@@ -28,5 +28,11 @@ namespace StudentTestPicker
                 classCollection.SelectedItem = null;
             }
         }
+
+        public void Add_Class()
+        {
+            ((Models.AllClasses)BindingContext).AddClass(ClassNumber.Text);
+            ((Models.AllClasses)BindingContext).LoadClasses();
+        }
     }
 }

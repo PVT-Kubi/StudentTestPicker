@@ -10,9 +10,13 @@
             VerticalOptions="Center">
 
             <Label Text="Program do losowania uczniów"/>
+            <HorizontalStackLayout>
+                <Editor HeightRequest="10" Placeholder="Enter class name" x:Name="ClassNumber"/>
+                <Button Text="Dodaj klase" Clicked="Add_Class"/>
+            </HorizontalStackLayout>
             <Label Text="Wybierz klasę do losowania" />
-
-            <CollectionView x:Name="countersCollection"
+            
+            <CollectionView x:Name="classCollection"
                             ItemsSource="{Binding Classes}"
                             Margin="20"
                             SelectionMode="Single"

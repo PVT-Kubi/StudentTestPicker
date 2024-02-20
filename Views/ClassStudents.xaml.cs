@@ -1,4 +1,4 @@
-using GameController;
+
 
 namespace StudentTestPicker.Views;
 
@@ -21,10 +21,9 @@ public partial class ClassStudents : ContentPage
         BindingContext = new Models.AllStudents(classNumber);
     }
 
-    private void BoughtButton_Chagned(object sender, EventArgs e)
+    public void Add_Student()
     {
-        Models.Product p = new Models.Product(ProductFilename, ProductName, ProductCategory, ProductUnit, ProductAmmount);
-        p.setBought(ProductBought);
-        ProductBought = p.isBought;
+        ((Models.AllStudents)BindingContext).AddStudent(((Models.AllStudents)BindingContext).getClassNumber(), StudentName.Text, StudentSurname.Text);
+        ((Models.AllStudents)BindingContext).LoadStudents(((Models.AllStudents)BindingContext).getClassNumber());
     }
 }

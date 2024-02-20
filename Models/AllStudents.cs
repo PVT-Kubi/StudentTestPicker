@@ -10,10 +10,17 @@ namespace StudentTestPicker.Models
     class AllStudents
     {
         public ObservableCollection<Student> Students { get; set; } = new ObservableCollection<Student>();
+        public string classNumber;
 
         public AllStudents(string klasa)
         {
+            classNumber = klasa;
             LoadStudents(klasa);
+        }
+
+        public string getClassNumber()
+        {
+            return classNumber;
         }
 
         public void LoadStudents(string klasa)
