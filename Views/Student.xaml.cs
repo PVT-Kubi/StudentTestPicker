@@ -9,7 +9,7 @@ public partial class Student : ContentView
     public static readonly BindableProperty StudentSurnameProperty = BindableProperty.Create(nameof(StudentSurname), typeof(string), typeof(Student), string.Empty);
     public static readonly BindableProperty StudentPresenceProperty = BindableProperty.Create(nameof(StudentPresence), typeof(bool), typeof(Student), true);
     public static readonly BindableProperty StudentAskedCountProperty = BindableProperty.Create(nameof(StudentAskedCount), typeof(int), typeof(Student), 0);
-    public static readonly BindableProperty StudentClassProperty = BindableProperty.Create(nameof(StudentClass), typeof(string), typeof(Klasa), String.Empty);
+    public static readonly BindableProperty StudentClassProperty = BindableProperty.Create(nameof(StudentClass), typeof(string), typeof(Student), String.Empty);
 
     public string StudentClass
     {
