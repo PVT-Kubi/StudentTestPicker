@@ -31,7 +31,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="{Binding ClassNumber}"  FontSize="18" />
+                            <Label Text="{Binding ClassNumber}"  FontSize="18" TextColor="Black"/>
+                            <Button Text="Usun klase" Clicked="Delete_Class_Button_Clicked"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

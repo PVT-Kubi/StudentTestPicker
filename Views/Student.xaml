@@ -3,22 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudentTestPicker.Views.Student"
              x:Name="this">
+    <VerticalStackLayout>
     <Frame BindingContext="{x:Reference this}">
         <VerticalStackLayout>
             <HorizontalStackLayout>
-                <Label Text="{Binding Name}"  FontSize="18" />
-                <Label Text="{Binding Surname}" FontSize="22"/>
+                <Label Text="{Binding StudentName}"  FontSize="18" />
+                <Label Text="{Binding StudentSurname}" FontSize="22"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label Text="Obecny"/>
-                <CheckBox IsChecked="{Binding Presence}" CheckedChanged="SwitchPresence"/>
+                    <CheckBox IsChecked="{Binding StudentPresence}" CheckedChanged="SwitchPresence"/>
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout>
-                <Label Text="Ile dni temu ostatnio pytany"/>
-                <Label Text="{Binding AskedCount}"/>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Ile dni temu ostatnio pytany"/>
+                    <Label Text="{Binding StudentAskedCount}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
     </Frame>
+    </VerticalStackLayout>
 </ContentView>

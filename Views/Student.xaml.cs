@@ -1,3 +1,4 @@
+
 using StudentTestPicker.Models;
 
 namespace StudentTestPicker.Views;
@@ -55,8 +56,8 @@ public partial class Student : ContentView
 
     private void SwitchPresence(object sender, EventArgs e)
     {
-        AllStudents all = new AllStudents(StudentClass);
-        all.ChangePresence(StudentClass, StudentName, StudentSurname);
-        StudentPresence = !StudentPresence;
+        Models.AllStudents all = new Models.AllStudents(StudentClass);
+        int a = all.ChangePresence(StudentClass, StudentNumber, StudentName, StudentSurname, StudentPresence, StudentAskedCount);
+        
     }
 }

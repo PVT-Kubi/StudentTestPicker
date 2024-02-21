@@ -42,14 +42,14 @@ namespace StudentTestPicker.Models
         public int AddClass(string name)
         {
             string appDataPath = FileSystem.AppDataDirectory;
-            string className = $"{name}.cls.json";
+            string className = $"{name}.cls.txt";
 
             if(File.Exists(Path.Combine(appDataPath, className)))
             {
                 return 1; 
             }
 
-            if (name.Split("\t").Length <= 1)
+            if (name.Split("\t").Length > 1)
                 return 2;
 
             File.WriteAllText(Path.Combine(appDataPath, className), $"{name}");
@@ -58,7 +58,7 @@ namespace StudentTestPicker.Models
 
         public int DeleteClass(string klasa)
         {
-            string path = Path.Combine(FileSystem.AppDataDirectory, $"/{klasa}.cls.txt");
+            string path = Path.Combine(FileSystem.AppDataDirectory, $"{klasa}.cls.txt");
 
             if (!File.Exists(path)) return 1;
 

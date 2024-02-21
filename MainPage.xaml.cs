@@ -5,7 +5,7 @@ namespace StudentTestPicker
 {
     public partial class MainPage : ContentPage
     {
-
+        Klasa currentClass = new Klasa();
         public MainPage()
         {
             InitializeComponent();
@@ -22,16 +22,28 @@ namespace StudentTestPicker
             if(e.CurrentSelection.Count > 0)
             {
                 Klasa klasa = (Models.Klasa)e.CurrentSelection[0];
-
-                await Shell.Current.GoToAsync($"{nameof(ClassStudents)}?{nameof(ClassStudents.ItemId)}={klasa.ClassNumber}");
-
+                currentClass = klasa;
                 classCollection.SelectedItem = null;
+                await Shell.Current.GoToAsync($"//{nameof(ClassStudents)}?{nameof(ClassStudents.ItemId)}={klasa.ClassNumber}");
             }
         }
 
-        public void Add_Class()
+        private async void Add_Class(object sender, EventArgs e)
         {
-            ((Models.AllClasses)BindingContext).AddClass(ClassNumber.Text);
+            int i = ((Models.AllClasses)BindingContext).AddClass(ClassNumber.Text);
+            if(i != 0)
+            {
+                if (i == 1)
+                    await DisplayAlert("Alert", "You have been alerted", "OK");
+                else
+                    await DisplayAlert("aler", "Cos innego sie zesralo", "OK");
+            }
+            ((Models.AllClasses)BindingContext).LoadClasses();
+        }
+
+        private void Delete_Class_Button_Clicked(object sender, EventArgs e)
+        {
+            ((Models.AllClasses)BindingContext).DeleteClass(currentClass.ClassNumber);
             ((Models.AllClasses)BindingContext).LoadClasses();
         }
     }
