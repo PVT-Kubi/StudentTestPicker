@@ -22,7 +22,7 @@ public partial class ClassStudents : ContentPage
     public void LoadStudens(string classNumber)
     {
         BindingContext = new Models.AllStudents(classNumber);
-        StudentluckyNumber.Text = ((Models.AllStudents)BindingContext).luckyNumber.ToString();
+        StudentluckyNumber.Text = $"Sczêœliwy numerek: {((Models.AllStudents)BindingContext).luckyNumber.ToString()}";
     }
 
     private void Add_Student(object sender, EventArgs e)
@@ -50,7 +50,7 @@ public partial class ClassStudents : ContentPage
         }
        
         ((Models.AllStudents)BindingContext).LoadStudents(((Models.AllStudents)BindingContext).getClassNumber());
-        StudentluckyNumber.Text = ((Models.AllStudents)BindingContext).luckyNumber.ToString();
+        StudentluckyNumber.Text = $"Sczêœliwy numerek: {((Models.AllStudents)BindingContext).luckyNumber.ToString()}";
     }
 
     private void DeleteStudent(object sender, EventArgs e)

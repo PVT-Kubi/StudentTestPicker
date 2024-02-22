@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
+using System.Diagnostics.Metrics;
 
 namespace StudentTestPicker.Models
 {
@@ -79,7 +80,7 @@ namespace StudentTestPicker.Models
                 if(student.ClassNumber == classNumber)
                 {
                     classStudents.Add(student);
-                    if(student.AskedCount != 0 || student.Number == luckyNumber)
+                    if(student.AskedCount != 0 || student.Number == luckyNumber || student.Presence == false)
                     {
                         counterOfUnavaiable++;
                     }
@@ -111,23 +112,32 @@ namespace StudentTestPicker.Models
                 rollLuckyNumber();
                 return new Student();
             }
+            Student target;
 
-            while(true)
+            while (true)
             {
                 int random = rnd.Next(classStudents.Count);  
-                Student target = classStudents[random];
-                if(target.AskedCount == 0 && target.Presence) 
+                target = classStudents[random];
+                if(target.AskedCount == 0 && target.Presence && target.Number != luckyNumber) 
                 {
                     foreach(Student s in classStudents)
                     {
-                        if (s.AskedCount == 3)
-                            s.AskedCount = 0;
-                        else if (s.Name != target.Name && s.Surname != target.Surname && s.AskedCount == 0)
-                            continue;
-                        else if (s.Number == luckyNumber)
-                            continue;
+                        if(s == target)
+                        {
+                            if (s.AskedCount == 3)
+                                s.AskedCount = 0;
+                            else
+                                s.AskedCount++;
+                        }
                         else
-                            s.AskedCount++;
+                        {
+                            if (s.AskedCount == 3)
+                                s.AskedCount = 0;
+                            else if (s.AskedCount > 0 && s.AskedCount < 3)
+                                s.AskedCount++;
+                        }
+
+
 
                         string text = File.ReadAllText(path);
                         string[] studentData = text.Split("\n");
@@ -143,9 +153,11 @@ namespace StudentTestPicker.Models
                     }
                     rollLuckyNumber();
                     return target;
+
                 }
 
             }
+            
         }
 
         public int AddStudent(string klasa, string name, string surname)
@@ -204,15 +216,18 @@ namespace StudentTestPicker.Models
             string new_text = "";
             string text = File.ReadAllText(path);
             string[] studentData = text.Split("\n");
+            int counter = 1;
             for(int i = 0; i < studentData.Length; i++)
             {
+                Student s;
                 string[] stD = studentData[i].Split("\t");
                 if (stD.Length == 1)
                 {
                     new_text += $"{stD[0]}";
-                }else if (stD.Length > 2 && stD[1] != name && stD[2] != surname)
+                }else if (stD.Length > 2 && (stD[1] != name || stD[2] != surname))
                 {
-                    new_text += $"\n{stD[0]}\t{stD[1]}\t{stD[2]}\t{stD[3]}\t{stD[4]}\t{stD[5]}";
+                    new_text += $"\n{counter}\t{stD[1]}\t{stD[2]}\t{stD[3]}\t{stD[4]}\t{stD[5]}";
+                    counter++;
                 }
             }
 

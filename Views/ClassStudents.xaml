@@ -4,38 +4,40 @@
              x:Class="StudentTestPicker.Views.ClassStudents"
               xmlns:v="clr-namespace:StudentTestPicker.Views"
              Title="ClassStudents">
-    <VerticalStackLayout>
-        <HorizontalStackLayout>
-            <Editor HeightRequest="10" Placeholder="Enter counter name" x:Name="StudentName"/>
-            <Editor HeightRequest="10" Placeholder="Enter default value" x:Name="StudentSurname"/>
-            <Button Text="Dodaj ucznia" Clicked="Add_Student"/>
-            <Button Text="Wróć" Clicked="ReturnButtonClicked" />
-            <Button Text="Losuj ucznia" Clicked="DrawStudent"/>
-        </HorizontalStackLayout>
+    
+       <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout StyleClass="formInput">
+                <Editor HeightRequest="10" Placeholder="Enter counter name" x:Name="StudentName"/>
+                <Editor HeightRequest="10" Placeholder="Enter default value" x:Name="StudentSurname"/>
+                <Button Text="Dodaj ucznia" Clicked="Add_Student" StyleClass="addButton"/>
+                <Button Text="Wróć" Clicked="ReturnButtonClicked" StyleClass="deleteButton"/>
+                <Button Text="Losuj ucznia" Clicked="DrawStudent" x:Name="Drawbutton"/>
+            </HorizontalStackLayout>
 
-        <HorizontalStackLayout>
-            <Editor HeightRequest="10" Placeholder="Enter student name" x:Name="StudentNameD"/>
-            <Editor HeightRequest="10" Placeholder="Enter surname value" x:Name="StudentSurnameD"/>
-            <Button Text="Usuń ucznia" Clicked="DeleteStudent"/>
-        </HorizontalStackLayout>
+            <HorizontalStackLayout  StyleClass="formInput">
+                <Editor HeightRequest="10" Placeholder="Enter student name" x:Name="StudentNameD"/>
+                <Editor HeightRequest="10" Placeholder="Enter surname value" x:Name="StudentSurnameD"/>
+                <Button Text="Usuń ucznia" Clicked="DeleteStudent" StyleClass="deleteButton"/>
+            </HorizontalStackLayout>
 
-        <Label Text="" x:Name="StudentluckyNumber"/>
+            <Label Text="" x:Name="StudentluckyNumber"/>
 
-        <CollectionView x:Name="studentsCollection"
+            <CollectionView x:Name="studentsCollection"
                             ItemsSource="{Binding Students}"
                             Margin="20"
                             SelectionMode="Single"
                             >
 
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <v:Student
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <v:Student
                            StudentName="{Binding Name}"
                            StudentSurname="{Binding Surname}"
                            StudentNumber="{Binding Number}"
@@ -43,10 +45,12 @@
                            StudentAskedCount="{Binding AskedCount}"
                            StudentClass="{Binding ClassNumber}"
                            />
-                        
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
     </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>

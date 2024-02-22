@@ -6,18 +6,18 @@
     <VerticalStackLayout>
     <Frame BindingContext="{x:Reference this}">
         <VerticalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="{Binding StudentName}"  FontSize="18" />
-                <Label Text="{Binding StudentSurname}" FontSize="22"/>
+            <HorizontalStackLayout StyleClass="HorizontalStudent">
+                <Label Text="{Binding StudentName}"/>
+                <Label Text="{Binding StudentSurname}" />
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout>
+            <HorizontalStackLayout StyleClass="HorizontalStudent">
                 <Label Text="Obecny"/>
                     <CheckBox IsChecked="{Binding StudentPresence}" CheckedChanged="SwitchPresence"/>
             </HorizontalStackLayout>
 
-                <HorizontalStackLayout>
-                    <Label Text="Ile dni temu ostatnio pytany"/>
+                <HorizontalStackLayout StyleClass="HorizontalStudent2">
+                    <Label Text="Ile dni temu ostatnio pytany "/>
                     <Label Text="{Binding StudentAskedCount}"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>

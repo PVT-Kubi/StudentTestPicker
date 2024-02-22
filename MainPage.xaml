@@ -1,20 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudentTestPicker.MainPage">
+             x:Class="StudentTestPicker.MainPage"
+             >
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">
-
-            <Label Text="Program do losowania uczniów"/>
-            <HorizontalStackLayout>
-                <Editor HeightRequest="10" Placeholder="Enter class name" x:Name="ClassNumber"/>
-                <Button Text="Dodaj klase" Clicked="Add_Class"/>
+            VerticalOptions="Center"
+            >
+ 
+            <HorizontalStackLayout StyleClass="CenterSomeStuff">
+                <Label Text="Wylosuj" StyleClass="TitleLabel"/>
+                <Label Text="Ucznia!" StyleClass="TitleLabel"/>
             </HorizontalStackLayout>
-            <Label Text="Wybierz klasę do losowania" />
+
+            <HorizontalStackLayout StyleClass="CenterSomeStuff">
+                <Editor HeightRequest="10" Placeholder="Enter class name" x:Name="ClassNumber"/>
+                <Button Text="Dodaj klase" Clicked="Add_Class" StyleClass="addButton"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout StyleClass="CenterSomeStuff">
+                <Label Text="Wybierz klasę do losowania" x:Name="Klasa"/>
+            </HorizontalStackLayout>
+            
             
             <CollectionView x:Name="classCollection"
                             ItemsSource="{Binding Classes}"
@@ -30,9 +39,9 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding ClassNumber}"  FontSize="18" TextColor="Black"/>
-                            <Button Text="Usun klase" Clicked="Delete_Class_Button_Clicked"/>
+                        <StackLayout x:Name="classFrame">
+                            <Label Text="{Binding ClassNumber}"  x:Name="classroomName" />
+                            <Button Text="Usun klase" Clicked="Delete_Class_Button_Clicked" StyleClass="deleteButton"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
